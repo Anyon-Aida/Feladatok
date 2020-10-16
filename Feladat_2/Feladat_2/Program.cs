@@ -46,7 +46,7 @@ namespace Feladat_2
                     value[a] = int.Parse(adat[a].Split('|')[1]);
                 }
                 catch (Exception) { }
-                if (value[a] != 0 && value[a] > 0 && value[a]%1==0) 
+                if (value[a] > 0) 
                 {
                     key.Add(int.Parse(adat[a].Split('|')[0]));
                 }
@@ -60,7 +60,7 @@ namespace Feladat_2
 
             da.Fill(dt);
 
-            //MySqlCommand view = new MySqlCommand(query, c.connect);
+            /*MySqlCommand view = new MySqlCommand(query, c.connect);
             string id_data = ""; 
             for (int a = 0; a <= key.Count; a++) 
             {
@@ -71,17 +71,30 @@ namespace Feladat_2
                     if (a <= key.Count - 1) { id_data += ","; }
                 }
             }
-            string query = "select id,name from user where id in (" + id_data + ")";
-            Console.WriteLine(id_data);
-            /*
+            */
+            string query = "select id,name from user";
+            
             MySqlCommand view = new MySqlCommand(query, c.connect);
+            List<string> szamok = new List<string>();
+            List<string> nevek = new List<string>();
             MySqlDataReader dr = view.ExecuteReader();
             while (dr.Read())
             {
-                Console.Write(dr.GetValue(0).ToString() + "  ");
-                Console.Write(dr.GetValue(1).ToString() + "\n", Encoding.UTF8);
+                szamok.Add(dr.GetValue(0).ToString());
+                nevek.Add(dr.GetValue(1).ToString());
             }
-            */
+            Console.WriteLine(szamok.Count);
+            Console.WriteLine(key.Count);
+            key.ForEach(Console.WriteLine);
+            for (int a = 0; a <= szamok.Count-1; a++) 
+            {
+                for (int b = 0; b <= key.Count-1; b++)
+                {
+                    if (key[b] == int.Parse(szamok[a])) { Console.WriteLine(szamok[a], nevek[a]); }
+
+                }
+            }
+
             c.CloseConncetion();
             Console.ReadLine();
         }
