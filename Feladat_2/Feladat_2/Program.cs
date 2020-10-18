@@ -22,6 +22,13 @@ namespace Feladat_2
         }
         static void Main(string[] args)
         {
+            //+debug
+            if (File.Exists(@"Kiválasztottak.txt"))
+            {
+                Console.WriteLine("A szoftvert már egyszer lefutattad!");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
             //2.feladat
             int[] random = new int[10];
             Random rnd = new Random();
@@ -38,7 +45,7 @@ namespace Feladat_2
             string[] adat = File.ReadAllLines("olvass.txt", Encoding.Default);
             //3.1 3.2 feladat
             List<int> key = new List<int>();
-            double[] value = new double[adat.Length];
+            int[] value = new int[adat.Length];
             for (int a = 1; a < adat.Length; a++)
             {
                 try
@@ -50,7 +57,6 @@ namespace Feladat_2
                 {
                     key.Add(int.Parse(adat[a].Split('|')[0]));
                 }
-
             }
             //kiíratas
             Program c = new Program();
@@ -72,29 +78,34 @@ namespace Feladat_2
                 }
             }
             */
-            string query = "select id,name from user";
-            
+            string query2 = "select id,brand,model from car";
+            string query = "select user, user.name,car.brand,car.model from ((user_car inner join car on user_car.car = car.id) inner join user on user_car.user = user.id)";
+
             MySqlCommand view = new MySqlCommand(query, c.connect);
+            MySqlCommand view2 = new MySqlCommand(query2, c.connect);
             List<string> szamok = new List<string>();
             List<string> nevek = new List<string>();
+            List<string> brand = new List<string>();
+            List<string> model = new List<string>();
             MySqlDataReader dr = view.ExecuteReader();
             while (dr.Read())
             {
                 szamok.Add(dr.GetValue(0).ToString());
                 nevek.Add(dr.GetValue(1).ToString());
+                brand.Add(dr.GetValue(2).ToString());
+                model.Add(dr.GetValue(3).ToString());
             }
-            Console.WriteLine(szamok.Count);
-            Console.WriteLine(key.Count);
-            key.ForEach(Console.WriteLine);
+            //key.ForEach(Console.WriteLine);
+            StreamWriter feltoltes = new StreamWriter("Kiválasztottak.txt");
             for (int a = 0; a <= szamok.Count-1; a++) 
             {
                 for (int b = 0; b <= key.Count-1; b++)
                 {
-                    if (key[b] == int.Parse(szamok[a])) { Console.WriteLine(szamok[a], nevek[a]); }
-
+                    if (key[b] == int.Parse(szamok[a])) { feltoltes.WriteLine("{0}\t{1}\t{2}", nevek[a], brand[a], model[a], Encoding.UTF8); }
                 }
             }
-
+            Console.WriteLine("Feltöltés sikeres!");
+            feltoltes.Close();
             c.CloseConncetion();
             Console.ReadLine();
         }
