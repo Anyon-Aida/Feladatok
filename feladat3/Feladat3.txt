@@ -1,0 +1,18 @@
+3.Feladat
+1:SELECT user.name FROM `user` left join user_car on user.id = user_car.user WHERE user.name Like 'Kis%' and user_car.user is null
+2:SELECT user.name FROM `user_car` INNER JOIN user ON user.id = user_car.user GROUP BY user.name Having COUNT(user_car.user) > 1
+2.1:SELECT user.id, user.name, GROUP_CONCAT(c.brand,' ',c.model) as car
+	FROM ((`user_car`
+	INNER JOIN user ON user.id = user_car.user)
+	JOIN car as c ON Find_IN_SET(user_car.car, c.id))
+	GROUP BY user.name
+	Having COUNT(user_car.user) > 1
+3:ALTER TABLE user Add gender char(1), Add id_n VARCHAR(13)
+4:INSERT INTO car (brand,model) VALUES('volkswagen','arteon')
+5:UPDATE car SET model = 'Fiesta' WHERE model = 'Focus'
+6:INSERT INTO user_car(user, car)
+SELECT user.id, car.id(8)
+FROM user
+INNER JOIN car on user_car.car = car.id 
+WHERE user.name LIKE('%o%' OR '%i%') AND user.id<10
+7:CREATE UNIQUE INDEX cars ON user_car(user,car)
