@@ -8,7 +8,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('list_add/');    
+        return view('list_add.hozzaad');    
     }
 
     public function validation(Request $request)

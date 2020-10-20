@@ -20,7 +20,7 @@
 			</ul>
 		</nav>
 		<div class="container">
-			<form action="{{route('/Controllers')}}" method="post">
+			<form action="{{route('Controllers/validation')}}" method="post">
 				<div class="form-row">
 					<div class="form-group col-md-6{{ $errors->has('owner.') . $x }}">
 						<label for="owner-{{ $x }}" class="control-label">Tulajdonos #{{ $x }}</label>
