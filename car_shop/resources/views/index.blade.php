@@ -15,7 +15,7 @@
 				<a class="nav-link" href="#">Listázás</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="hozzaad.php">Hozzáadás</a>
+				<a class="nav-link" href="list_add/">Hozzáadás</a>
 			  </li>
 			</ul>
 		</nav>

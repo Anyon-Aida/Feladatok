@@ -9,22 +9,27 @@
 			<a class="navbar-brand" href="#">Kovács Zalán Dominik</a>
 			<ul class="nav mx-auto">
 			  <li class="nav-item">
-				<a class="nav-link" href="#">Home</a>
+				<a class="nav-link" href="/">Home</a>
 			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" href="#">Listázás</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link active" href="hozzaad.php">Hozzáadás</a>
+				<a class="nav-link active" href="list_add/">Hozzáadás</a>
 			  </li>
 			</ul>
 		</nav>
 		<div class="container">
-			<form action="validation.php" method="post">
+			<form action="{{route('/Controllers')}}" method="post">
 				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="exampleInputEmail1">Tulajdonos</label>
-						<input type="text" class="form-control" name="owner" id="tulajdonos" aria-describedby="emailHelp" placeholder="Név">
+					<div class="form-group col-md-6{{ $errors->has('owner.') . $x }}">
+						<label for="owner-{{ $x }}" class="control-label">Tulajdonos #{{ $x }}</label>
+						<input type="text" class="form-control" name="owner" id="owner-{{ $x }}" aria-describedby="emailHelp" placeholder="Név">
+						@if($errors->has('owner.' . $x))
+							<span class="help-block">
+								{{ $errors->first('owner.' . $x)}}
+							</span>
+						@endif
 					</div>
 					<div class="form-group  col-md-4">
 						<label for="inputState">Autó kiválasztása</label>

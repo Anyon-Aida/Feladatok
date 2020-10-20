@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class ShareController extends Controller
 {
-    public function index()
+    public function hozzaad()
     {
-        return view('list_add/');    
+        return view('list_add.hozzaad');    
     }
 
     public function validation(Request $request)
