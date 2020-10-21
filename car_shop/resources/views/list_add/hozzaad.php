@@ -20,16 +20,12 @@
 			</ul>
 		</nav>
 		<div class="container">
-			<form action="{{route('Controllers/validation')}}" method="post">
+			<form action="post" method="POST">
+				@csrf
 				<div class="form-row">
-					<div class="form-group col-md-6{{ $errors->has('owner.') . $x }}">
-						<label for="owner-{{ $x }}" class="control-label">Tulajdonos #{{ $x }}</label>
-						<input type="text" class="form-control" name="owner" id="owner-{{ $x }}" aria-describedby="emailHelp" placeholder="Név">
-						@if($errors->has('owner.' . $x))
-							<span class="help-block">
-								{{ $errors->first('owner.' . $x)}}
-							</span>
-						@endif
+					<div class="form-group col-md-6">
+						<label class="control-label">Tulajdonos</label>
+						<input type="text" class="form-control" name="owner" aria-describedby="emailHelp" placeholder="Név">
 					</div>
 					<div class="form-group  col-md-4">
 						<label for="inputState">Autó kiválasztása</label>

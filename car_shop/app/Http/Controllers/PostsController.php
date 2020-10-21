@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function create()
     {
-        return view('list_add.hozzaad');    
+        return view('post.create');    
     }
 
-    public function validation(Request $request)
+    public function store(Request $request)
     {
-        dd($request->owner);
 
-        $this->validate($request, [
-            'owner.*' => 'required|owner'
+        $this ->validate($request,[
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
         ]);
     }
 }

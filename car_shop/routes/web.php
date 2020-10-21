@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@index');
 Route::get('/list_add', 'PagesController@hozzaad');
-Route::get('/Controllers', 'PostsController@index');
-Route::post('/Controllers', 'PostsController@validation');
+Route::get('post/create', 'PostsController@create');
+Route::post('post', 'PostsController@store');

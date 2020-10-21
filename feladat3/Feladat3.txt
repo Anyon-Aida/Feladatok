@@ -11,8 +11,6 @@
 4:INSERT INTO car (brand,model) VALUES('volkswagen','arteon')
 5:UPDATE car SET model = 'Fiesta' WHERE model = 'Focus'
 6:INSERT INTO user_car(user, car)
-SELECT user.id, car.id(8)
-FROM user
-INNER JOIN car on user_car.car = car.id 
-WHERE user.name LIKE('%o%' OR '%i%') AND user.id<10
+SELECT id,(SELECT id FROM car WHERE brand = 'volkswagen' AND model = 'arteon')
+FROM user WHERE (name LIKE '%o%' OR name LIKE '%r%') AND id<10;
 7:CREATE UNIQUE INDEX cars ON user_car(user,car)
